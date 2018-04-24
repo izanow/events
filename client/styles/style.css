@@ -1,0 +1,123 @@
+html, body {
+    font-family: 'Quattrocento Sans', sans-serif !important;
+}
+
+form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+.btn-default {
+    background: #ffffff;
+    cursor: pointer;
+    padding-bottom: 15px;
+}
+
+.add {
+    width: 84px;
+}
+
+span {
+    font-weight: 100;
+    font-size: 15px;
+}
+
+p {
+    color: #000000;
+    font-size: 20px;
+}
+
+.title {
+    color: #000000;
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.first {
+    background-color: #ffffff;
+    height: 200px;
+    width: 400px;
+    border-radius: 10px;
+    opacity: 0.5;
+    padding-top: 60px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.event {
+    border: 1px solid #ececec;
+    padding: 15px;
+    color: #666666;
+}
+
+.number {
+    font-size: 27px;
+    width: 38px;
+    margin-top: 5px;
+    margin-left: 5px;
+    border: 1px solid #c7c7c7;
+    border-radius: 10%;
+    color: #c7c7c7;
+}
+
+.actions {
+    margin-top: 5px;
+    text-align: right;
+}
+
+.name {
+    font-size: 30px;
+}
+
+.description {
+    clear: both;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+button {
+    background-color: #d2d2d2;
+    color: #ffffff;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #ececec;
+    color: #aaaaaa;
+}
+
+.id, .actions, .start, .end, .people, .price {
+    width: 25%;
+    font-size: 20px;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.name {
+    width: 49.7%;
+    float: left;
+}
+
+.sort {
+    color: #aaaaaa;
+}
+
+.show-all {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+#message {
+    margin-left: 20px;
+}

@@ -1,0 +1,40 @@
+{
+  "name": "events-izanow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/izanow/events.git"
+  },
+  "author": "Izabela Nowicka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/izanow/events/issues"
+  },
+  "homepage": "https://github.com/izanow/events#readme",
+  "dependencies": {
+    "angular": "^1.6.10",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.1.2",
+    "mocha": "^5.1.1",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.4.1",
+    "sequelize": "^4.37.6"
+  }
+}

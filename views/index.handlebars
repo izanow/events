@@ -1,0 +1,161 @@
+<div ng-controller="MainController">
+    <form class="form-inline justify-content-between">
+        <div class="form-group">
+            <label>Search: </label>
+            <input type="number" ng-model="eventIdToSearch" class="form-control" placeholder="search">
+            <button class="btn" ng-click="searchEvent(eventIdToSearch)"><i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+            <div id="message"></div>
+        </div>
+        <div class="form-group">
+            <label>Filter: </label>
+            <input ng-model="filter" class="form-control" placeholder="filter">
+        </div>
+    </form>
+    <form>
+        <table class="table" style="margin-bottom: 10px;">
+            <thead>
+            <tr>
+                <th class="text-center">Id
+                    <button class="btn btn-default sort" ng-click="sortEvents('id')"><i class="fa fa-sort"
+                                                                                        aria-hidden="true"></i></button>
+                </th>
+                <th class="text-center">Name
+                    <button class="btn btn-default sort" ng-click="sortEvents('name')"><i class="fa fa-sort"
+                                                                                          aria-hidden="true"></i>
+                    </button>
+                </th>
+                <th class="text-center">Description
+                    <button class="btn btn-default sort" ng-click="sortEvents('description')"><i class="fa fa-sort"
+                                                                                                 aria-hidden="true"></i>
+                    </button>
+                </th>
+                <th class="text-center">Start
+                    <button class="btn btn-default sort" ng-click="sortEvents('start_date')"><i class="fa fa-sort"
+                                                                                                aria-hidden="true"></i>
+                    </button>
+                </th>
+                <th class="text-center">End
+                    <button class="btn btn-default sort" ng-click="sortEvents('end_date')"><i class="fa fa-sort"
+                                                                                              aria-hidden="true"></i>
+                    </button>
+                </th>
+                <th class="text-center">People
+                    <button class="btn btn-default sort" ng-click="sortEvents('people')"><i class="fa fa-sort"
+                                                                                            aria-hidden="true"></i>
+                    </button>
+                </th>
+                <th class="text-center">Price <span>(PLN)</span>
+                    <button class="btn btn-default sort" ng-click="sortEvents('price')"><i class="fa fa-sort"
+                                                                                           aria-hidden="true"></i>
+                    </button>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="creating-row" style="height: 80px;">
+                <th class="create" scope="row" style="color: lightgrey; padding-top: 22px;">######</th>
+                <td style="padding-top: 22px;"><input type="text" class="form-control" ng-model="event.name"
+                                                      placeholder="name" name="name"></td>
+                <td style="padding-top: 22px;"><input type="text" class="form-control" ng-model="event.description"
+                                                      placeholder="description" name="description"></td>
+                <td style="padding-top: 22px;"><input id="start-date" type="date" class="form-control"
+                                                      ng-model="event.start_date" placeholder="start" name="start_date">
+                </td>
+                <td style="padding-top: 22px;"><input id="end-date" type="date" min="0" class="form-control"
+                                                      ng-model="event.end_date" placeholder="end" name="end_date"></td>
+                <td style="padding-top: 22px;"><input type="number" min="0" class="form-control"
+                                                      ng-model="event.people" placeholder="people" name="people"></td>
+                <td style="padding-top: 22px;"><input type="number" class="form-control" ng-model="event.price"
+                                                      placeholder="price"></td>
+                <td style="padding-top: 22px;">
+                    <button class="btn add" ng-click="createEvent()" ng-hide="createIsHiden"
+                    ><i class="fa fa-plus"
+                        aria-hidden="true"></i>
+                    </button>
+                    <div class="btn-group" ng-hide="editIsHiden">
+                        <button class="btn" ng-click="updateEvent()"><i class="fa fa-check"
+                                                                        aria-hidden="true"></i>
+                        </button>
+                        <button class="btn" ng-click="clearEvent()"><i class="fa fa-eraser"
+                                                                       aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="event" ng-hide="foundEvent === ''">
+            <div class="top-area">
+                <div class="id">
+                    <div class="number text-center" ng-bind="foundEvent.id"></div>
+                </div>
+                <div class="text-center name" ng-bind="foundEvent.name"></div>
+                <div class="actions">
+                    <div class="btn-group">
+                        <button class="btn" ng-click="deleteEvent(foundEvent.id)"><i class="fa fa-trash-o"
+                                                                                     aria-hidden="true"></i></button>
+                        <button class="btn" ng-click="editEvent(foundEvent.id)"><i class="fa fa-pencil-square-o"
+                                                                                   aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center description" ng-bind="foundEvent.description"></div>
+            <div class="row">
+                <div class="text-center start"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                    <p ng-bind="foundEvent.start_date"></p>
+                </div>
+                <div class="text-center end"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+                    <p ng-bind="foundEvent.end_date"></p>
+                </div>
+                <div class="text-center people"><i class="fa fa-users" aria-hidden="true"></i> <p ng-bind="foundEvent.people"></p>
+                </div>
+                <div class="text-center price"><i class="fa fa-money" aria-hidden="true"></i> <p ng-bind="foundEvent.price"></p>
+                    <span>(PLN)</span></div>
+            </div>
+        </div>
+        <div class="show-all" ng-hide="foundEvent === ''">
+            <button class="btn" ng-click="setPage(1)">Show all</button>
+        </div>
+        <div class="event"
+             ng-repeat="event in events | orderBy:sortKey:reverse | filter:filter">
+            <div class="top-area">
+                <div class="id">
+                    <div class="number text-center" ng-bind="event.id"></div>
+                </div>
+                <div class="text-center name" ng-bind="event.name"></div>
+                <div class="actions">
+                    <div class="btn-group">
+                        <button class="btn" ng-click="deleteEvent(event.id)"><i class="fa fa-trash-o"
+                                                                                aria-hidden="true"></i></button>
+                        <button class="btn" ng-click="editEvent(event.id)"><i class="fa fa-pencil-square-o"
+                                                                              aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center description" ng-bind="event.description"></div>
+            <div class="row">
+                <div class="text-center start"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                    <p ng-bind="event.start_date"></p>
+                </div>
+                <div class="text-center end"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+                    <p ng-bind="event.end_date"></p>
+                </div>
+                <div class="text-center people"><i class="fa fa-users" aria-hidden="true"></i>  <p ng-bind="event.people"></p></div>
+                <div class="text-center price"><i class="fa fa-money" aria-hidden="true"></i>
+                    <div class="d-flex justify-content-center"><p style="padding: 0 3px;" ng-bind="event.price"></p><span style="padding-top: 3px;">PLN</span></div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <ul class="pagination justify-content-center" ng-show="foundEvent === '' && pages.length > 1">
+                <li class="page-item" ng-repeat="number in pages"><a class="page-link" href="#"
+                                                                     ng-click="setPage(number)" ng-bind="number"></a></li>
+            </ul>
+        </nav>
+    </form>
+</div>
+{{#each scripts}}
+    <script src="{{script}}"></script>
+{{/each}}
